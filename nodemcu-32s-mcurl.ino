@@ -1,5 +1,16 @@
+#define __DEBUG__
+
+#ifdef __DEBUG__
+#define DEBUG(...) Serial.println(__VA_ARGS__)
+#else
+#define DEBUG(...)
+#endif
+
 void setup() {
-  // put your setup code here, to run once:
+  Serial.begin(115200);
+  Serial.println("Setup ESP32 Start. ");
+  DEBUG("Enable DEBUG mode.");
+  Serial.println("Setup ESP32 completed.");
 }
 
 void loop() {
