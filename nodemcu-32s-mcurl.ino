@@ -6,6 +6,11 @@
 #define DEBUG(...)
 #endif
 
+#include <WiFiClientSecure.h>
+
+String wifi_ssid;
+String wifi_password;
+
 void setup() {
   Serial.begin(115200);
   DEBUG("Setup ESP32 Start.");
@@ -29,6 +34,22 @@ void loop() {
     DEBUG("substr=" + substr);
     if (substr == "a") {
       DEBUG("Alive");
+    } else if (substr == "wc") {
+      substr = strsep(str, ",");
+      wifi_ssid = substr;
+      DEBUG(wifi_ssid);
+      substr = strsep(str, ",");
+      wifi_password = substr;
+      DEBUG(wifi_password);
+      //
+      // Conncect
+      //
+      int retry = 0;
+      WiFi.begin(wifi_ssid, wifi_password);
+      while (WiFi.status() != WL_CONNECTED && retry <= 10) {
+        delay(1000);
+        retry++;
+      }
     }
   }
 }
