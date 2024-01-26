@@ -8,11 +8,31 @@
 
 void setup() {
   Serial.begin(115200);
-  Serial.println("Setup ESP32 Start. ");
+  DEBUG("Setup ESP32 Start.");
   DEBUG("Enable DEBUG mode.");
-  Serial.println("Setup ESP32 completed.");
+  DEBUG("Setup ESP32 completed.");
+
+  String str = "op1:op2";
+  String substr = strsep(str, String(":"));
+  DEBUG(substr);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+}
+
+String strsep(String &stringp, const String &delim) {
+  if (!stringp || stringp == "") return "";
+
+  String token;
+  int delimIndex = stringp.indexOf(delim);
+
+  if (delimIndex != -1) {
+    token = stringp.substring(0, delimIndex);
+    stringp = stringp.substring(delimIndex + delim.length());
+  } else {
+    token = stringp;
+    stringp = "";
+  }
+
+  return token;
 }
