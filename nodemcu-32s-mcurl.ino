@@ -18,6 +18,19 @@ void setup() {
 }
 
 void loop() {
+  if (Serial.available() > 0) {
+    String str = Serial.readStringUntil('\n');
+    DEBUG("COM Input: " + str);
+    if (str.endsWith("\r")) {
+      str.remove(str.length() - 1);
+    }
+    String substr = strsep(str, ":");
+    DEBUG("str=" + str);
+    DEBUG("substr=" + substr);
+    if (substr == "a") {
+      DEBUG("Alive");
+    }
+  }
 }
 
 String strsep(String &stringp, const String &delim) {
