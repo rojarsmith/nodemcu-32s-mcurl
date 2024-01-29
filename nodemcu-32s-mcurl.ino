@@ -16,10 +16,6 @@ void setup() {
   DEBUG("Setup ESP32 Start.");
   DEBUG("Enable DEBUG mode.");
   DEBUG("Setup ESP32 completed.");
-
-  String str = "op1:op2";
-  String substr = strsep(str, String(":"));
-  DEBUG(substr);
 }
 
 void loop() {
@@ -34,6 +30,9 @@ void loop() {
     DEBUG("substr=" + substr);
     if (substr == "a") {
       DEBUG("Alive");
+    } else if (substr == "r") {
+      DEBUG("Reboot");
+      ESP.restart();
     } else if (substr == "wc") {
       substr = strsep(str, ",");
       wifi_ssid = substr;
