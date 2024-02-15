@@ -1,7 +1,15 @@
 #define __DEBUG__
 
 #ifdef __DEBUG__
-#define DEBUG(...) Serial.println(__VA_ARGS__)
+// #define DEBUG(...) Serial.println(__VA_ARGS__)
+#define DEBUG(...) \
+  Serial.println(__VA_ARGS__); \
+  Serial.print(" @ [SRC]:      "); \
+  Serial.println(__FILE__); \
+  Serial.print(" @ [LINE]:     "); \
+  Serial.println(__LINE__); \
+  Serial.print(" @ [FUNCTION]: "); \
+  Serial.println(__func__);
 #else
 #define DEBUG(...)
 #endif
